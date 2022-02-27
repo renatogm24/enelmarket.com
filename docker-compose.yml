@@ -1,19 +1,6 @@
 version: "3.3"
 
 services:
-  nginx-ssl-proxy:
-    image: danieldent/nginx-ssl-proxy
-    restart: always
-    environment:
-      UPSTREAM: 127.0.0.1:3000
-      SERVERNAME: enelmarket.com
-      EXTRANAMES: www.enelmarket.com, *.enelmarket.com
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "/etc/letsencrypt"
-
   frontend: #it is just a name, which will be used only in this file.
     image: frontend-img #name of the image after dockerfile executes
     container_name: frontend-service-app #name of the container created from docker image
@@ -69,5 +56,18 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/bookclub?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: spring
+
+  nginx-ssl-proxy:
+    image: danieldent/nginx-ssl-proxy
+    restart: always
+    environment:
+      UPSTREAM: 127.0.0.1:3000
+      SERVERNAME: enelmarket.com
+      EXTRANAMES: www.enelmarket.com, *.enelmarket.com
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/etc/letsencrypt"
 volumes:
   my-datavolume:
