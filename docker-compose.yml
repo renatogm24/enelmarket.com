@@ -11,7 +11,7 @@ services:
       - "3000:3000" #docker containter port with your os port
     restart: always
     environment:
-      ROOT_URL: enelmarket.com
+      ROOT_URL: localhost:3000
 
   #service 1: definition of mysql database
   db:
